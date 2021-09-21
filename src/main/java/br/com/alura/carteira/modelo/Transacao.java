@@ -3,6 +3,9 @@ package br.com.alura.carteira.modelo;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 public class Transacao {
 
@@ -10,6 +13,8 @@ public class Transacao {
 	private BigDecimal preco;
 	private int quantidade;
 	private LocalDate data;
+	
+	// @JsonIgnore anotação para jamais mostrar esse atributo no JSON
 	private TipoTransacao tipo;
 	
 	
