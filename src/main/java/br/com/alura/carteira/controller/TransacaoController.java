@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,8 +59,12 @@ public class TransacaoController {
 	}
 
 	@PostMapping
-	public void cadastrar(@RequestBody TransacaoFormDto dto) {
+	public void cadastrar(@RequestBody @Valid TransacaoFormDto dto) {
 		Transacao transacao = modelMapper.map(dto, Transacao.class);
+		
+		//beam validation é feito atraves de anotacoes na classe TransacaoDto
+		//deixar a classe de dominio com a menor dependencia possivel de frameworks e bibliotecas
+		
 		transacoes.add(transacao);
 	
 	}
