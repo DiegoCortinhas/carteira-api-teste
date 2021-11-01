@@ -9,7 +9,7 @@ import br.com.alura.carteira.modelo.Transacao;
 public class TestandoLombok {
 	public static void main(String[] args) {
 		Transacao t = new Transacao();
-		Transacao t2 = new Transacao("XPTO1",new BigDecimal(119.20),100,LocalDate.now(),TipoTransacao.COMPRA);
+		//Transacao t2 = new Transacao("XPTO1",new BigDecimal(119.20),100,LocalDate.now(),TipoTransacao.COMPRA);
 		t.setPreco(new BigDecimal("100.99"));
 		
 		System.out.println(t.getPreco());
