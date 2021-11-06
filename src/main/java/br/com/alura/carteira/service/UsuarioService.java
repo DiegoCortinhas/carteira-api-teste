@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.alura.carteira.dto.TransacaoDto;
 import br.com.alura.carteira.dto.UsuarioDto;
 import br.com.alura.carteira.dto.UsuarioFormDto;
 import br.com.alura.carteira.modelo.Transacao;
@@ -38,7 +39,7 @@ public class UsuarioService {
 	}
 	
 	@Transactional
-	public void cadastrar(UsuarioFormDto dto) {
+	public UsuarioDto cadastrar(UsuarioFormDto dto) {
 		Usuario usuario = modelMapper.map(dto, Usuario.class);
 		
 		//geracao de senha aleatoria de 0 a 999999
@@ -48,6 +49,7 @@ public class UsuarioService {
 		//System.out.println(usuario);
 		//System.out.println(usuario.getSenha());
 		usuarioRepository.save(usuario);
+		return modelMapper.map(usuario,UsuarioDto.class);
  
 	}
 	
