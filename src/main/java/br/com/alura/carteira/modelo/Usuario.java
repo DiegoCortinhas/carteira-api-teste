@@ -17,10 +17,8 @@ import lombok.ToString;
 @ToString(exclude = {"senha"})
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "usuarios")
-
 public class Usuario {
 	
 	@Id
