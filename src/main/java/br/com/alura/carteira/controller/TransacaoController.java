@@ -35,14 +35,14 @@ public class TransacaoController {
 
 	@PostMapping
 	public ResponseEntity<TransacaoDto> cadastrar(@RequestBody @Valid TransacaoFormDto dto,UriComponentsBuilder uriBuilder) {
-		TransacaoDto  transacaoDto = service.cadastrar(dto);
+		TransacaoDto  cadastrada = service.cadastrar(dto);
 		
-		URI uri = uriBuilder
+		URI endereco = uriBuilder
 				.path("/transacoes/{id}")
-				.buildAndExpand(transacaoDto.getId())
+				.buildAndExpand(cadastrada.getId())
 				.toUri();
 		
-		return ResponseEntity.created(uri).body(transacaoDto);
+		return ResponseEntity.created(endereco).body(cadastrada);
 	
 	}
 

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -21,8 +22,9 @@ import lombok.Setter;
 @Setter
 public class TransacaoFormDto {
 	
-	@NotNull @NotEmpty @Size(min=5, max=6)
-	@Pattern(regexp = "[a-zA-Z]{4}[0-9][0-9]?")
+	@NotBlank
+	@Size(min=5, max=6)
+	@Pattern(regexp = "[a-zA-Z]{4}[0-9][0-9]?",message= "{transacao.ticker.invalido}")
 	private String ticker;
 	
 	@NotNull
