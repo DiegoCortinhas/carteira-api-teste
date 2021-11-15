@@ -1,6 +1,7 @@
 package br.com.alura.carteira.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import br.com.alura.carteira.modelo.TipoTransacao;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class TransacaoDto {
 	private BigDecimal preco;
 	private Integer quantidade;
 	private TipoTransacao tipo;
+	
 	
 	/*
 	 * public TransacaoDto(Transacao transacao) { 

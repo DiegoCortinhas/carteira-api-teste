@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class TransacaoService {
 	
 	@Autowired
 	private TransacaoRepository transacaoRepository;
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
 	private ModelMapper modelMapper = new ModelMapper();
@@ -40,13 +42,22 @@ public class TransacaoService {
 		//throw new NullPointerException("Testando Erro 500");
 		
 		Long idUsuario = dto.getUsuarioId();
-		Usuario usuario = usuarioRepository.getById(idUsuario);
 		
-		Transacao transacao = modelMapper.map(dto, Transacao.class);
-		transacao.setId(null);
-		transacao.setUsuario(usuario);
-		transacaoRepository.save(transacao);
-		return modelMapper.map(transacao,TransacaoDto.class);
+		try {
+			Usuario usuario = usuarioRepository.getById(idUsuario);
+			Transacao transacao = modelMapper.map(dto, Transacao.class);
+			transacao.setId(null);
+			transacao.setUsuario(usuario);
+			transacaoRepository.save(transacao);
+			
+			return modelMapper.map(transacao,TransacaoDto.class);
+		
+		} catch (EntityNotFoundException e) {
+			throw new IllegalArgumentException("Usuário Inexistente!");
+		}
+		
+		
+		//return new TransacaoDto();
 	}
 	
 }
