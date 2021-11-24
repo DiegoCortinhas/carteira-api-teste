@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,9 +31,8 @@ class TransacaoServiceTest {
 	
 	@InjectMocks  //da new na Service e injeta os Mocks criados anteriormente
 	private TransacaoService service;
-
-	@Test
-	void deveriaCadastrarUmaTransacao() {
+	
+	private TransacaoFormDto criarTransacaoFormDto() {
 		TransacaoFormDto formDto = new TransacaoFormDto(
 				"ITSA4",
 				new BigDecimal("10.45"),
@@ -41,11 +41,19 @@ class TransacaoServiceTest {
 				TipoTransacao.COMPRA,
 				1l
 				);
+		return formDto;
+	}
+
+
+	@Test
+	void deveriaCadastrarUmaTransacao() {
+		TransacaoFormDto formDto = criarTransacaoFormDto();
 
 		TransacaoDto dto = service.cadastrar(formDto);
 		
-		Mockito.verify(transacaoRepository.save(Mockito.any()));
+		Mockito.verify(transacaoRepository).save(Mockito.any());
 		
+			
 		//asserts do Junit para fazer as verificações
 		//Mock simular comportamentos nos testes automatizados
 		// Mock utilizado para simular a dependencia que tem dentro de uma classe
