@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.alura.carteira.dto.AtualizacaoTransacaoFormDto;
+import br.com.alura.carteira.dto.TransacaoDetalhadaDto;
 import br.com.alura.carteira.dto.TransacaoDto;
 import br.com.alura.carteira.dto.TransacaoFormDto;
 import br.com.alura.carteira.modelo.Transacao;
@@ -58,6 +63,23 @@ public class TransacaoService {
 		
 		
 		//return new TransacaoDto();
+	}
+
+	@Transactional
+	public TransacaoDto atualizar(AtualizacaoTransacaoFormDto dto) {
+		Transacao transacao = transacaoRepository.getById(dto.getId());
+		transacao.atualizarInformacoes(dto.getTicker(),dto.getData(),dto.getPreco(),dto.getQuantidade(),dto.getTipo());
+		return modelMapper.map(transacao,TransacaoDto.class);
+	}
+
+	@Transactional
+	public void remover(Long id) {
+		transacaoRepository.deleteById(id);
+	}
+
+	public TransacaoDetalhadaDto detalhar(Long id) {
+		Transacao transacao = transacaoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+		return modelMapper.map(transacao,TransacaoDetalhadaDto.class);
 	}
 	
 }
