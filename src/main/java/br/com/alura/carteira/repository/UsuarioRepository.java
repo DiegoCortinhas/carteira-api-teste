@@ -10,12 +10,14 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.cdi.JpaRepositoryExtension;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import br.com.alura.carteira.modelo.TipoTransacao;
@@ -26,6 +28,8 @@ import ch.qos.logback.core.joran.spi.NoAutoStart;
 
 //@Repository - acesso aos dados da aplicação - para spring conhecer a classe e conseguir injetar EM 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+
+	Optional<Usuario> findByLogin(String login);
 	
 	/*
 	@Autowired
