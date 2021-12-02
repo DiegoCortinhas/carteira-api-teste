@@ -1,7 +1,6 @@
 package br.com.alura.carteira.controller;
 
 import java.net.URI;
-import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
