@@ -35,6 +35,7 @@ public class TransacaoController {
 
 	@GetMapping
 	public Page<TransacaoDto> listar(@PageableDefault(size=10) Pageable paginacao) {
+		
 		return service.listar(paginacao);
 	}
 
