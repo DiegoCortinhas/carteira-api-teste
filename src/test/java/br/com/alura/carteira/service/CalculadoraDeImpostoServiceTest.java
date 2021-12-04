@@ -25,7 +25,7 @@ class CalculadoraDeImpostoServiceTest {
 				quantidade,
 				LocalDate.now(),
 				tipo,
-				new Usuario(1l,"Rafaela","rafa@email.com","123456")
+				new Usuario(1l,"Rafaela","rafa@email.com","123456",null)
 				);
 		return transacao;
 	}
