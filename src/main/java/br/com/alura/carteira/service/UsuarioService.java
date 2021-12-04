@@ -49,10 +49,13 @@ public class UsuarioService {
 		Perfil perfil = perfilRepository.getById(dto.getPerfilId());
 		usuario.adicionarPerfil(perfil);
 		
+		//System.out.println("id do usuario é: " + usuario.getId());
 		
 		//geracao de senha aleatoria de 0 a 999999
 		String senha = new Random().nextInt(999999) + "";
 		usuario.setSenha(bCryptPasswordEncoder.encode(senha));
+		
+		usuario.setId(null);
 		
 		usuarioRepository.save(usuario);
 		return modelMapper.map(usuario,UsuarioDto.class);
