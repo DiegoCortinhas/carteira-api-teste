@@ -27,6 +27,7 @@ import lombok.ToString;
 @Getter 
 @Setter
 @ToString(exclude = {"senha"})
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

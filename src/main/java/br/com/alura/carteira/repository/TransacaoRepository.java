@@ -14,6 +14,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Repository;
 import br.com.alura.carteira.dto.ItemCarteiraDto;
 import br.com.alura.carteira.modelo.TipoTransacao;
 import br.com.alura.carteira.modelo.Transacao;
+import br.com.alura.carteira.modelo.Usuario;
 import ch.qos.logback.core.joran.spi.NoAutoStart;
 
 
@@ -34,6 +37,8 @@ public interface TransacaoRepository extends JpaRepository<Transacao, Long>{
 			+ "FROM Transacao t "
 			+ "GROUP BY t.ticker")
 	List<ItemCarteiraDto> relatorioCarteiraDeInvestimentos();
+
+	Page<Transacao> findAllByUsuario(Pageable paginacao, Usuario usuario);
 	
 	
 	

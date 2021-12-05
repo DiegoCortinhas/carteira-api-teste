@@ -1,5 +1,6 @@
 package br.com.alura.carteira.infra;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -44,6 +46,12 @@ public class TratamentoDeErros {
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	public void tratarErro404() {
 		
+	}
+	
+	@ExceptionHandler(AccessDeniedException.class)
+	@ResponseStatus(code = HttpStatus.FORBIDDEN)
+	public String tratarErro403(AccessDeniedException e) {
+		return e.getMessage();
 	}
 	
 }
