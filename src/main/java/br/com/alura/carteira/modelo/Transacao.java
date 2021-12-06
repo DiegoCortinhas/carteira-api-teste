@@ -46,6 +46,8 @@ public class Transacao {
 	
 	@ManyToOne							//@JoinColumn(name="id_usuario")
 	private Usuario usuario;
+	
+	private BigDecimal imposto;
 
 	public Transacao(String ticker, BigDecimal preco, Integer quantidade, LocalDate data, TipoTransacao tipo,
 			Usuario usuario) {
