@@ -26,18 +26,14 @@ public class TokenService {
 	
 	public boolean isValido(String token) {
 		try {
-			
 			Jwts
 			.parser()
 			.setSigningKey(secret)
 			.parseClaimsJws(token);
 			return true;
-			
 		} catch (Exception e) {
 			return false;
 		}
-		
-		
 	}
 
 	public Long extrairIdUsuario(String token) {
