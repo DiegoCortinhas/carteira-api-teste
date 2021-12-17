@@ -34,7 +34,7 @@ public class VerificacaoTokenFilter extends OncePerRequestFilter{
 		
 		
 		String token = request.getHeader("Authorization");
-		if(token == null || token.isBlank()) {
+		if(token == null || token.isEmpty()) {
 			filterChain.doFilter(request, response);
 			return;
 		}
